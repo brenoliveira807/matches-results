@@ -38,6 +38,6 @@ window.JOGOS = {
       "mandante": "corinthians", "visitante": "fortaleza",
       "gols_mandante": 1, "gols_visitante": 0,
       "titulo": false,
-      "comentario_midia": "Yuri Alberto marca o jogo da partida logo no início e garante vitória em casa pelo campeonato brasileiro." }
+      "comentario_midia": "Yuri Alberto marca o gol da partida logo no início e garante vitória em casa pelo campeonato brasileiro." }
   ]
 };

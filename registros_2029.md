@@ -22,7 +22,7 @@
 💬 *Em partida apertada contra o Bragantino, João Gomes abre o placar e garante vitória fora de casa.*
 
 🟢 Corinthians 1 x 0 Fortaleza - Brasileirão 2029
-💬 *Yuri Alberto marca o jogo da partida logo no início e garante vitória em casa pelo campeonato brasileiro.*
+💬 *Yuri Alberto marca o gol da partida logo no início e garante vitória em casa pelo campeonato brasileiro.*
 ```
 
 **Resumo:** 7 jogos · 6 vitórias · 0 empates · 0 derrotas · 15 gols pró · 3 gols contra

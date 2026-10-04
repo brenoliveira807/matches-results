@@ -10,7 +10,7 @@ window.TIMES = {
     { "id": "al-ittihad",         "nome": "Al-Ittihad Club",    "tipo": "clube",   "pais": "Arábia Saudita", "escudo": "al-ittihad-logo-footylogos-320.webp" },
     { "id": "junior",             "nome": "Junior",             "tipo": "clube",   "pais": "Colômbia",       "escudo": "atletico-junior-logo-footylogos-320.webp" },
     { "id": "henan",              "nome": "Henan",              "tipo": "clube",   "pais": "China",          "escudo": "henan-songshan-longmen.76824806.png" },
-    { "id": "gremio-novo-horizontino", "nome": "Grêmio Novo Horizontino", "tipo": "clube",   "pais": "Brasil",         "escudo": null },
+    { "id": "gremio-novo-horizontino", "nome": "Grêmio Novo Horizontino", "tipo": "clube",   "pais": "Brasil",         "escudo": "gremio-novorizontino-logo-footylogos-320.webp" },
     { "id": "rb-bragantino",      "nome": "RB Bragantino",      "tipo": "clube",   "pais": "Brasil",         "escudo": "rb-bragantino-logo-footylogos-320.webp" },
     { "id": "fortaleza",          "nome": "Fortaleza",          "tipo": "clube",   "pais": "Brasil",         "escudo": "fortaleza-logo-footylogos-320.webp" }
   ]

@@ -5,7 +5,27 @@
 
   var TIMES = window.TIMES;
   var COMPETICOES = window.COMPETICOES;
-  var JOGOS = window.JOGOS;
+  
+  // Carregar jogos: temporada atual (2029) + histórico (2028)
+  var JOGOS = window.JOGOS || {};
+  var JOGOS_2028 = window.JOGOS_2028 || {};
+  
+  // Unir todos os jogos e numerar sequencialmente
+  var jogosAtual = JOGOS.jogos || [];
+  var jogosHistoricos = JOGOS_2028.jogos || [];
+  var TODOS_JOGOS = [];
+  
+  // Adicionar jogos históricos primeiro, depois atuais
+  jogosHistoricos.forEach(function (j) { 
+    j.id = j.id; // manter IDs originais de 2028
+  });
+  jogosAtual.forEach(function (j) { 
+    if (!j.id || String(j.id).length < 4) j.id = TODOS_JOGOS.length + 1;
+    else j.id += 1000; // IDs altos para distinguir temporada atual
+  });
+  
+  TODOS_JOGOS = jogosHistoricos.concat(jogosAtual);
+  var JOGOS_UNIDOS = { "jogos": TODOS_JOGOS };
 
   /* ---------------- helpers ---------------- */
   function escudoUrl(file) {
@@ -64,26 +84,14 @@
     return p[2] + '/' + p[1] + '/' + p[0];
   }
   function jogoLabel(jogo) {
-    if (!jogo.jogo) return null;
-    if (jogo.jogo === 'ida') return 'Jogo de ida';
-    if (jogo.jogo === 'volta') return 'Jogo de volta';
+    if (!jogo.fase) return null;
+    if (jogo.fase === 'ida') return 'Jogo de ida';
+    if (jogo.fase === 'volta') return 'Jogo de volta';
+    var fase = jogo.fase.split('-')[0]; // primeira palavra
+    if (['final', 'semifinal', 'quartas-de-final', 'oitavas-de-final'].indexOf(fase) !== -1) {
+      return fase.replace('-', ' ').toUpperCase();
+    }
     return 'Jogo único';
-  }
-
-  /* ---------------- DOM helpers ---------------- */
-  function el(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text != null) e.textContent = text;
-    return e;
-  }
-  function escudoImg(file, alt, cls) {
-    var img = document.createElement('img');
-    img.className = cls || 'crest';
-    var url = escudoUrl(file);
-    if (url) img.src = url; else img.hidden = true;
-    img.alt = alt || '';
-    return img;
   }
 
   /* ---------------- render: times treinados ---------------- */
@@ -172,7 +180,7 @@
     COMPETICOES.competicoes.forEach(function (comp) {
       if (filterComp !== 'todas' && comp.id !== filterComp) return;
 
-      var jogos = JOGOS.jogos
+      var jogos = TODOS_JOGOS
         .filter(function (j) { return j.competicao === comp.id; })
         .filter(function (j) {
           if (filterRes === 'todos') return true;
@@ -180,9 +188,14 @@
         })
         .slice()
         .sort(function (a, b) {
+          // Ordenar primeiro por fase/título, depois por data/ID
+          var fa = a.fase || '', fb = b.fase || '';
           var da = a.data || '', db = b.data || '';
-          if (da === db) return a.id - b.id;
-          return da < db ? -1 : 1;
+          if (fa === fb) {
+            if (da === db) return a.id - b.id;
+            return da < db ? -1 : 1;
+          }
+          return fa < fb ? -1 : 1;
         });
 
       if (jogos.length === 0) return;
@@ -248,8 +261,13 @@
     var cont = document.getElementById('stats-grid');
     cont.innerHTML = '';
 
+    // Estatísticas apenas dos jogos da temporada atual (IDs > 999)
+    var tempAtual = TODOS_JOGOS.filter(function (j) { 
+      return isTreinador(j.mandante) || isTreinador(j.visitante); 
+    });
+
     var v = 0, e = 0, d = 0, gp = 0, gc = 0, titulos = 0;
-    JOGOS.jogos.forEach(function (j) {
+    tempAtual.forEach(function (j) {
       var pov = treinadorPOV(j);
       if (pov.resultado === 'V') v++;
       else if (pov.resultado === 'E') e++;
@@ -260,7 +278,7 @@
 
     var saldo = gp - gc;
     var items = [
-      ['Jogos', JOGOS.jogos.length],
+      ['Jogos', tempAtual.length],
       ['Vitórias', v],
       ['Empates', e],
       ['Derrotas', d],

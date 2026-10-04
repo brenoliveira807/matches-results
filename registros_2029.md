@@ -1,6 +1,6 @@
-# Registros — Temporada 2029
+# Registros — Temporada 2028
 
-> Times treinados: Corinthians (clube) · Seleção Brasileira (seleção)
+> Times treinados: **Corinthians (clube)**
 
 ```
 🟢 Corinthians 2 x 0 The Old Boys - Amistoso

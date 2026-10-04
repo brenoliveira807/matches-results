@@ -84,18 +84,6 @@
 
 **Resumo:** 6 jogos · 6 vitórias · 0 empates · 0 derrotas · 14 gols pró · 5 gols contra
 
----
-
-## 📊 Resumo da Temporada 2028 (Todos os Times)
-
-| Time | Jogos | Vitórias | Empates | Derrotas | Gols Pró | Gols Contra |
-|------|-------|----------|---------|----------|----------|-------------|
-| Corinthians | 35 | 31 | 3 | 1 | 86 | 29 |
-| Uruguai | 5 | 4 | 0 | 1 | 15 | 6 |
-| Brasil | 6 | 6 | 0 | 0 | 14 | 5 |
-
----
-
 **🏆 Maior conquista:** **Corinthians campeão histórico de tudo!**  
 - Brasileirão 2028 🏆  
 - Libertadores 2028 🏆  

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registros — Temporada 2029</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+    body {
+      font-family: 'Titillium Web', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      line-height: 1.5;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-style: normal;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-weight: 600;
+      font-style: normal;
+      margin-top: 1.5em;
+    }
+
+    blockquote {
+      margin: 0 0 1.5em 0;
+      padding-left: 1em;
+      border-left: 3px solid #ffffff;
+    }
+
+    p {
+      margin-top: 1.5em;
+      font-weight: 400;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    /* Estilos para tabela de jogos */
+    .match-row {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 15px;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      font-size: 0.9em;
+      align-items: center;
+      border-bottom: 1px solid #999999;
+    }
+
+    .col-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .indicator {
+      font-size: 1.4em;
+    }
+
+    .team-home {
+      font-weight: 500;
+    }
+
+    .score {
+      font-weight: 700;
+      font-size: 1.3em;
+      white-space: nowrap;
+    }
+
+    .team-away {
+      font-weight: 400;
+    }
+
+    .competition {
+      color: #888888;
+      font-size: 0.85em;
+    }
+
+    /* Hint styles - coluna da direita com tooltip animado */
+    .item-hints {
+      height: 60px;
+      width: 300px;
+      margin-left: auto;
+      margin-right: 15px;
+    }
+
+    .hint {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hint:hover {
+      transform: scale(1.05);
+    }
+
+    .hint::before {
+      /* rotated square */
+      background-color: #ffffff;
+      width: 8px;
+      height: 8px;
+      z-index: 2;
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hint::after {
+      /* green glow */
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+      z-index: 1;
+      box-shadow: 0 0 50px 30px rgba(72, 170, 72, 0.3);
+      animation: hint_glow 2s cubic-bezier(0.25, 0.1, 0.2, 1) infinite;
+      transition: opacity 0.5s ease;
+    }
+
+    @keyframes hint_glow {
+      0% { box-shadow: 0 0 30px 5px #48aa48; }
+      70% { box-shadow: 0 0 70px 50px rgba(72, 170, 72, 0); }
+      100% { box-shadow: 0 0 0 50px rgba(72, 170, 72, 0); }
+    }
+
+    .hint-radius {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 250px;
+      height: 250px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -125px 0 0 -125px;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0);
+      transition-property: background-color, opacity, visibility, transform;
+      transition-duration: 0.5s;
+      transition-timing-function: ease, ease, ease, cubic-bezier(0.5, 0, 0, 1);
+    }
+
+    .hint:hover .hint-radius {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .hint-content {
+      color: #fff;
+      width: 300px;
+      position: absolute;
+      z-index: 5;
+      padding: 12px 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+      pointer-events: none;
+    }
+
+    .hint:hover .hint-content {
+      opacity: 1;
+      visibility: visible !important;
+    }
+
+    .hint-content::before {
+      width: 0px;
+      bottom: 0;
+      left: 0;
+      content: "";
+      background-color: #fff;
+      height: 1px;
+      position: absolute;
+      transition: width 0.4s;
+    }
+
+    .hint:hover .hint-content::before {
+      width: 180px;
+    }
+
+    .hint-content::after {
+      transform-origin: 0 50%;
+      transform: rotate(-225deg);
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      content: "";
+      background-color: #fff;
+      height: 1px;
+      position: absolute;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .hint:hover .hint-content::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Posicionamento do hint para posição 4 (inferior central) */
+    .hint[data-position="4"] .hint-content {
+      bottom: 85px;
+      left: 50%;
+      margin-left: 56px;
+    }
+  </style>
+</head>
+<body>
+<h1>Registros — Temporada 2029</h1>
+
+<blockquote>> Times treinados: <strong>Corinthians (clube)</strong></blockquote>
+
+<hr>
+
+<h2>Corinthians Paulista</h2>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Corinthians</span>
+    <span class="score">2 × 0</span>
+    <span class="team-away">The Old Boys</span>
+    <span class="competition">— Amistoso</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Em partida de despedida, Heittor Vinicius, jovem centro-avante da base, marca duas vezes sendo MVP da partida!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Corinthians</span>
+    <span class="score">4 × 2</span>
+    <span class="team-away">Al-Ittihad Club</span>
+    <span class="competition">— Florida Cup</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Apesar do gol contra de Chalobah, Corinthians vence o Al-Ittihad com goleada na estreia da Florida Cup.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Junior</span>
+    <span class="score">1 × 2</span>
+    <span class="team-away">Corinthians</span>
+    <span class="competition">— Florida Cup</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Com quase todo elenco formado na base, Corinthians vence o Junior e alcança a liderança na Florida Cup.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Henan</span>
+    <span class="score">1 × 3</span>
+    <span class="team-away">Corinthians</span>
+    <span class="competition">— Florida Cup 🏆</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Com promessas da base e novas contratações, Corinthians vence a Florida Cup na última rodada contra o time chinês.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Grêmio Novo Horizontino</span>
+    <span class="score">1 × 3</span>
+    <span class="team-away">Corinthians</span>
+    <span class="competition">— Brasileirão 2029</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Estreia em casa e Dani Olmo leva o Corinthians à sua primeira vitória no Brasileirão.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Red Bull Bragantino</span>
+    <span class="score">0 × 1</span>
+    <span class="team-away">Corinthians</span>
+    <span class="competition">— Brasileirão 2029</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Em partida apertada contra o Bragantino, João Gomes abre o placar e garante vitória fora de casa.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="match-row">
+  <div class="col-left">
+    <span class="indicator">🟢</span>
+    <span class="team-home">Corinthians</span>
+    <span class="score">1 × 0</span>
+    <span class="team-away">Fortaleza</span>
+    <span class="competition">— Brasileirão 2029</span>
+  </div>
+  <div class="item-hints">
+    <div class="hint" data-position="4">
+      <span class="hint-radius"></span>
+      <div class="hint-content">
+        <p>Yuri Alberto marca o gol da partida logo no início e garante vitória em casa pelo campeonato brasileiro.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p><strong>Resumo:</strong> 7 jogos · 6 vitórias · 0 empates · 0 derrotas · 15 gols pró · 3 gols contra</p>
+<p><strong>Troféus:</strong> Florida Cup 🏆</p>
+
+</body>
+</html>

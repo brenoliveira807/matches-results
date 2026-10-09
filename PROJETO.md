@@ -35,6 +35,11 @@ Indicador	Significado
 🟢	Vitória
 ⚪	Empate
 🔴	Derrota
+
+**Nota:** O indicador 🟢 (vitória) é sempre usado quando o time treinado vence, mesmo em jogos fora de casa. Por exemplo: "Atletico Mineiro 0 × 2 Corinthians" mostra o placar com o Atlético na casa (primeiro), mas como o Corinthians venceu fora, usa-se 🟢 no início do registro.
+
+**Nota de regra:** Os comentários da mídia sobre a partida não possuem relação com o placar. Ignore completamente o que é dito nos comentários, apenas faça o registro
+
 Regra do campo "Fase" e "Jogo de ida/volta":
 
 As colunas "Fase" e "Jogo de ida/volta" só são exibidas em competições eliminatórias (mata-mata) — ex.: "Final", "Semifinal", "Oitavas de final", "Jogo de ida/volta".
